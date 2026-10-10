@@ -30,30 +30,29 @@ export function VisibilityExplainer() {
           <Info aria-hidden className="size-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent size="lg">
         <DialogHeader>
           <DialogTitle>How visibility is calculated</DialogTitle>
           <DialogDescription>
-            A score from 0 to 100 for how close to the top of search your app
-            sits across its tracked keywords. 100 means first place for every
-            one of them.
+            A 0 to 100 score for how high your app ranks across its tracked
+            keywords. 100 means first place for all of them.
           </DialogDescription>
         </DialogHeader>
-        <DialogBody className="flex flex-col gap-4 text-sm">
-          <ol className="flex list-decimal flex-col gap-2 pl-6">
-            <li>
-              Every active tracked keyword earns a share from its position, 1 /
-              log2(position + 1). A keyword your app was not found for earns
-              nothing and still counts.
-            </li>
-            <li>
-              Each share is weighted by the keyword&apos;s popularity, so a
-              popular keyword moves the score more. A keyword that has no
-              popularity score yet barely counts.
-            </li>
-            <li>The score is the weighted average of those shares.</li>
-          </ol>
-          <table className="numeric w-full text-left">
+        <DialogBody className="grid gap-6 text-sm sm:grid-cols-2">
+          <div className="flex flex-col gap-4">
+            <ol className="flex list-decimal flex-col gap-2 pl-6">
+              <li>
+                Each keyword earns 1 / log2(position + 1). Not found earns 0.
+              </li>
+              <li>Popular keywords count more.</li>
+              <li>The score is the weighted average.</li>
+            </ol>
+            <p className="text-muted-foreground">
+              Compare it over time, not between apps. Paused keywords are left
+              out.
+            </p>
+          </div>
+          <table className="numeric w-full self-start text-left">
             <caption className="pb-2 text-left text-muted-foreground">
               What one keyword earns at each position
             </caption>
@@ -80,11 +79,6 @@ export function VisibilityExplainer() {
               </tr>
             </tbody>
           </table>
-          <p className="text-muted-foreground">
-            The score depends on which keywords you track, so compare it with
-            itself over time and not between apps. Tracking keywords your app
-            does not rank for lowers it, and paused keywords are left out.
-          </p>
         </DialogBody>
       </DialogContent>
     </Dialog>
