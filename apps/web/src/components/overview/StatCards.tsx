@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -13,6 +14,7 @@ import { formatDate } from "@/lib/format";
 import { useMarket } from "@/components/app-detail/use-market";
 import { appSummaryOptions } from "@/lib/queries";
 import { TrendChip } from "@/components/ui/delta-chip";
+import { VisibilityExplainer } from "./VisibilityExplainer";
 
 export function StatCards({ id }: { id: string }) {
   const { scope, markets } = useMarket(id);
@@ -28,6 +30,9 @@ export function StatCards({ id }: { id: string }) {
           <CardTitle className="numeric font-mono text-3xl">
             {Math.round(summary.visibility.current)}
           </CardTitle>
+          <CardAction>
+            <VisibilityExplainer />
+          </CardAction>
         </CardHeader>
         <CardContent className="flex gap-3">
           <TrendChip label="7d" value={summary.visibility.delta7d} />

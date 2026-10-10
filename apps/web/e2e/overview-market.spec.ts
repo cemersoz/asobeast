@@ -71,3 +71,19 @@ test("names no market on the cards of an app with one market", async ({
   await expect(page.getByText("Visibility", { exact: true })).toBeVisible();
   await expect(page.getByRole("combobox", { name: SWITCHER })).toHaveCount(0);
 });
+
+test("explains how visibility is calculated", async ({ page }) => {
+  await page.goto("/apps/app-1");
+
+  await page
+    .getByRole("button", { name: "How visibility is calculated" })
+    .click();
+
+  const dialog = page.getByRole("dialog", {
+    name: "How visibility is calculated",
+  });
+  await expect(dialog).toContainText("1 / log2(position + 1)");
+  await expect(
+    dialog.getByRole("table", { name: /earns at each position/ }),
+  ).toContainText("Not found");
+});
