@@ -11,6 +11,7 @@ import type {
   CategoryRankSeries,
   CategoryRankSeriesItem,
   CompetitorDiscovery,
+  CompetitorKeywordIdeas,
   DailyBudget,
   EmailAlertItem,
   FirstRunStatus,
@@ -976,6 +977,28 @@ export const KEYWORD_BREAKDOWNS: Record<string, KeywordBreakdown> = {
       },
     ],
   },
+};
+
+export const KEYWORD_IDEAS: CompetitorKeywordIdeas = {
+  country: "us",
+  seeds: ["focus timer", "study timer"],
+  popularityWeek: null,
+  ideas: [
+    {
+      text: "focus timer for studying",
+      popularity: 52,
+      suggestRank: 2,
+      seed: "focus timer",
+      usedBy: [{ appId: "comp-1", name: "Rival Focus" }],
+    },
+    {
+      text: "study timer with breaks",
+      popularity: null,
+      suggestRank: 1,
+      seed: "study timer",
+      usedBy: [],
+    },
+  ],
 };
 
 export const APP_1_DE_DISCOVERY: CompetitorDiscovery = {
