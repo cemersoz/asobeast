@@ -1,23 +1,27 @@
 import type { ListingMarket } from "@asobeast/shared";
 import { formatCountry } from "./format";
 
+const isListed = (country: string, markets: readonly ListingMarket[]) =>
+  markets.some((market) => market.country === country);
+
 export function resolveMarket(
   requested: string,
   markets: readonly ListingMarket[],
   home: string,
 ): string {
-  return markets.some((market) => market.country === requested)
-    ? requested
-    : home;
+  return isListed(requested, markets) ? requested : home;
 }
 
-export const ALL_MARKETS = "all";
+export const offersMarkets = (markets: readonly ListingMarket[]) =>
+  markets.length > 1;
 
 export function keywordScope(
   requested: string,
-  market: string,
+  markets: readonly ListingMarket[],
 ): string | undefined {
-  return requested === ALL_MARKETS ? undefined : market;
+  return offersMarkets(markets) && isListed(requested, markets)
+    ? requested
+    : undefined;
 }
 
 export function queryMarket(market: string, home: string): string | undefined {
